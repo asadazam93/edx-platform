@@ -1,6 +1,7 @@
 """Tests for util.db module."""
 
 import ddt
+import os
 import threading
 import time
 import unittest
@@ -12,6 +13,8 @@ from django.conf import settings
 from django.db import connection, IntegrityError
 from django.db.transaction import atomic, TransactionManagementError
 from django.test import TestCase, TransactionTestCase
+
+from mock import patch
 
 from util.db import (
     commit_on_success, enable_named_outer_atomic, outer_atomic, generate_int_id, NoOpMigrationModules
@@ -221,5 +224,10 @@ class MigrationTests(TestCase):
         Tests that the migration files are in sync with the models.
         If this fails, you needs to run the Django command makemigrations.
         """
-        with self.assertRaises(SystemExit):
-            call_command('makemigrations', '-e')
+
+        # Because this test verifies migrations, we need to ensure migrations are enabled
+        environ_copy = os.environ.copy()
+        environ_copy['DISABLE_MIGRATIONS'] = '0'
+        with patch.dict(os.environ, environ_copy, clear=True):
+            with self.assertRaises(SystemExit):
+                call_command('makemigrations', '-e')
