@@ -6,6 +6,7 @@ from django.test import TestCase
 
 import mock
 from branding.api import get_logo_url, get_footer
+from django.test.utils import override_settings
 
 
 class TestHeader(TestCase):
@@ -43,6 +44,7 @@ class TestFooter(TestCase):
         "MEDIA_KIT": "/media-kit",
         "ENTERPRISE": "/enterprise"
     })
+    @override_settings(PLATFORM_NAME='\xe9dX')
     def test_get_footer(self):
         actual_footer = get_footer(is_secure=True)
         expected_footer = {
@@ -50,7 +52,7 @@ class TestFooter(TestCase):
                          ' EdX logos are registered trademarks or trademarks of edX Inc.',
             'navigation_links': [
                 {'url': 'https://edx.org/about-us', 'name': 'about', 'title': 'About'},
-                {'url': 'https://edx.org/enterprise', 'name': 'enterprise', 'title': 'EdX for Business'},
+                {'url': 'https://edx.org/enterprise', 'name': 'enterprise', 'title': '\xe9dX for Business'},
                 {'url': 'https://edx.org/edx-blog', 'name': 'blog', 'title': 'Blog'},
                 {'url': 'https://edx.org/news-announcements', 'name': 'news', 'title': 'News'},
                 {'url': 'https://support.example.com', 'name': 'help-center', 'title': 'Help Center'},
