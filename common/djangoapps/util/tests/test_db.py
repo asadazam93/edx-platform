@@ -215,7 +215,7 @@ class MigrationTests(TestCase):
     """
     Tests for migrations.
     """
-    @skipIf(isinstance(settings.MIGRATION_MODULES, NoOpMigrationModules), 'Skip in case of NoOpMigrationModules')
+    # @skipIf(isinstance(settings.MIGRATION_MODULES, NoOpMigrationModules), 'Skip in case of NoOpMigrationModules')
     def test_migrations_are_in_sync(self):
         """
         Tests that the migration files are in sync with the models.
