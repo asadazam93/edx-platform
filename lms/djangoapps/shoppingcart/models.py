@@ -340,6 +340,7 @@ class Order(models.Model):
             course_id = item.course_id
             course = get_course_by_id(item.course_id, depth=0)
             registration_codes = CourseRegistrationCode.objects.filter(course_id=course_id, order=self)
+            course_info.append(course.display_name)
             for registration_code in registration_codes:
                 redemption_url = reverse('register_code_redemption', args=[registration_code.code])
                 url = '{base_url}{redemption_url}'.format(base_url=site_name, redemption_url=redemption_url)
