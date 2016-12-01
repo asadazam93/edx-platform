@@ -172,6 +172,7 @@ def _footer_navigation_links():
         }
         for link_name, link_url, link_title in [
             ("about", marketing_link("ABOUT"), _("About")),
+            ("enterprise", marketing_link("ENTERPRISE"), _("EdX for Business")),
             ("blog", marketing_link("BLOG"), _("Blog")),
             ("news", marketing_link("NEWS"), _("News")),
             ("help-center", settings.SUPPORT_SITE_LINK, _("Help Center")),

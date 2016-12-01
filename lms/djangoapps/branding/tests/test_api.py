@@ -40,7 +40,8 @@ class TestFooter(TestCase):
         "TOS_AND_HONOR": "/edx-terms-service",
         "PRIVACY": "/edx-privacy-policy",
         "ACCESSIBILITY": "/accessibility",
-        "MEDIA_KIT": "/media-kit"
+        "MEDIA_KIT": "/media-kit",
+        "ENTERPRISE": "/enterprise"
     })
     def test_get_footer(self):
         actual_footer = get_footer(is_secure=True)
@@ -49,6 +50,7 @@ class TestFooter(TestCase):
                          ' EdX logos are registered trademarks or trademarks of edX Inc.',
             'navigation_links': [
                 {'url': 'https://edx.org/about-us', 'name': 'about', 'title': 'About'},
+                {'url': 'https://edx.org/enterprise', 'name': 'enterprise', 'title': 'EdX for Business'},
                 {'url': 'https://edx.org/edx-blog', 'name': 'blog', 'title': 'Blog'},
                 {'url': 'https://edx.org/news-announcements', 'name': 'news', 'title': 'News'},
                 {'url': 'https://support.example.com', 'name': 'help-center', 'title': 'Help Center'},
