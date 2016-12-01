@@ -43,6 +43,7 @@ def recalculate_subsection_grade(
         )
     )
 
+
 @task(default_retry_delay=30, routing_key=settings.RECALCULATE_GRADES_ROUTING_KEY)
 def _recalculate_subsection_grade(**kwargs):
     """
@@ -84,7 +85,7 @@ def _recalculate_subsection_grade(**kwargs):
         kwargs['course_id'],
         kwargs['user_id'],
         kwargs['usage_id'],
-        task_queued_time,
+        kwargs['task_queued_time'],
         score_deleted,
     )
 
@@ -165,7 +166,7 @@ def _retry_recalculate_subsection_grade(
     Calls retry for the recalculate_subsection_grade task with the
     given inputs.
     """
-    recalculate_subsection_grade.retry(
+    _recalculate_subsection_grade.retry(
         kwargs=dict(
             user_id=user_id,
             course_id=course_id,
