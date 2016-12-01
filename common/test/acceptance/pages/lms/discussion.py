@@ -43,6 +43,9 @@ class DiscussionPageMixin(object):
         )
 
     def click_cancel_new_post(self):
+        """
+        Clicks the 'Cancel' button from the new post form.
+        """
         self.click_element(".cancel")
         self.wait_for(
             lambda: not self.new_post_form,
@@ -562,6 +565,9 @@ class InlineDiscussionPage(PageObject, DiscussionPageMixin):
 
 
 class InlineDiscussionThreadPage(DiscussionThreadPage):
+    """
+    Page object to manipulate an individual thread view in an inline discussion.
+    """
     def __init__(self, browser, thread_id):
         super(InlineDiscussionThreadPage, self).__init__(
             browser,
